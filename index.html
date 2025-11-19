@@ -13,31 +13,11 @@
     max-width: 600px;
     margin: auto;
     line-height: 1.6;
-    position: relative;
     text-align: center;
-  }
-
-  /* Subtle whimsical repeating background pattern */
-  body::before {
-    content: '✧ ✦ ✪ ❖ ☾ ✿ ';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 14px;
-    color: #3b2f2f;
-    opacity: 0.05;
-    z-index: -1;
-    white-space: pre;
-    pointer-events: none;
-    overflow: hidden;
-    background-repeat: repeat;
   }
 
   h1, h2, h3 {
     font-family: "Garamond", serif;
-    text-align: center;
     color: #4a3b3b;
   }
 
@@ -48,134 +28,152 @@
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    position: relative;
-    text-align: center;
   }
 
   button {
-    padding: 0.5rem 0.8rem;
-    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
     border: none;
     background: #e8e0d1;
     font-family: inherit;
-    font-size: 0.95rem;
-    margin: 0.3rem;
+    font-size: 1rem;
+    margin: 0.2rem;
     cursor: pointer;
   }
 
   #screen {
     margin-top: 0.8rem;
-    padding: 0.8rem;
+    padding: 1rem;
     background: #fdfaf5;
     border-radius: 8px;
     border: 1px solid #ded6c5;
     min-height: 2rem;
-    position: relative;
-    overflow: auto;
-    max-height: 400px;
-    text-align: center;
+    display: inline-block;
   }
 
-  input.puzzle-input {
-    width: 1.4rem;
-    height: 1.8rem;
-    text-align: center;
-    font-family: "Georgia", "Garamond", serif;
-    font-size: 1.1rem;
-    margin: 1px;
+  .decor-top, .decor-bottom {
+    font-size: 1.4rem;
+    opacity: 0.6;
+    margin: 0.5rem 0;
   }
 
-  .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  .menu .btn {
-    margin: 0.4rem 0;
+  .divider {
     text-align: center;
-    width: 80%;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    opacity: 0.4;
+    margin: 1rem 0;
+  }
+
+  /* Candle-style borders */
+  .section {
+    border: 2px solid #e5dccb;
+    border-image: repeating-linear-gradient(
+      to bottom,
+      #e5dccb,
+      #e5dccb 6px,
+      #f7f5f0 6px,
+      #f7f5f0 12px
+    ) 1;
+  }
+
+  /* Drop caps */
+  .dropcap:first-letter {
+    font-size: 2.4rem;
+    float: left;
+    padding-right: 6px;
+    padding-top: 2px;
+    font-family: "Garamond", serif;
+    color: #4a3b3b;
+  }
+
+  /* Moon phase headers */
+  .moon-header::before {
+    content: "🌑 🌒 🌓 🌔 🌕";
     display: block;
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid #ded6c5;
-    padding: 0.5rem;
-    border-radius: 6px;
+    text-align: center;
+    opacity: 0.5;
+    margin-bottom: 0.4rem;
   }
 
+  /* Glyph sparkles in background */
+  .glyph, .sparkle {
+    position: absolute;
+    font-size: 0.8rem;
+    opacity: 0.15;
+  }
+
+  /* Dark mode */
   body.dark {
     background-color: #1a1a1a;
     color: #ffffff;
   }
+
+  body.dark h1, body.dark h2, body.dark h3 {
+    color: #ffffff;
+  }
+
   body.dark .section {
     background: #2a2a2a;
     border-color: #555;
   }
+
   body.dark button {
     background: #3a3a3a;
     color: #ffffff;
   }
 
-  .sparkle {
-    position: absolute;
-    font-size: 1rem;
-    opacity: 0.2;
-    pointer-events: none;
-    animation: floaty 8s infinite;
-  }
-  @keyframes floaty {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-5px) rotate(180deg); }
-    100% { transform: translateY(0) rotate(360deg); }
+  body.dark #screen {
+    background: #222;
+    color: #ffffff;
   }
 
-  .glyph {
-    font-size: 1rem;
-    opacity: 0.25;
-    pointer-events: none;
-    display: inline-block;
-    margin: 0 0.2rem;
+  body.dark .glyph, body.dark .sparkle {
+    color: #ffffff;
+    opacity: 0.15;
   }
 
+  /* Input grid for puzzles */
   .puzzle-grid {
-    display: inline-block;
+    display: inline-grid;
+    grid-gap: 0.2rem;
+    justify-content: center;
+    margin: 0.5rem auto;
+  }
+
+  .puzzle-input {
+    width: 2rem;
+    height: 2rem;
     text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid #aaa;
   }
 
-  #screen.fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right:0;
-    bottom:0;
-    width: 100%;
-    height: 100%;
-    max-height: none;
-    z-index: 9999;
-    background: #fdfaf5;
-    overflow: auto;
-  }
-
-  #noteArea {
-    width: 90%;
-    height: 120px;
-    font-size: 16px;
-    border: 1px solid #000;
+  /* Links section */
+  .links a {
     display: block;
-    margin: auto;
-  }
-
-  .completion-msg {
-    margin-top: 0.5rem;
-    font-weight: bold;
+    margin: 0.3rem 0;
+    text-decoration: none;
+    color: inherit;
   }
 </style>
 </head>
 <body>
+<div class="decor-top glyph">✦ ✧ ✦</div>
+<div class="divider"></div>
 
-<div class="glyph">☾</div><div class="glyph">★</div><div class="glyph">✿</div>
+<h1>Kindle Dashboard</h1>
 
-<h2>✧ Cozy Puzzle Menu ✧</h2>
+<div class="links section">
+  <h2>Links</h2>
+  <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
+  <a href="https://www.old.reddit.com" target="_blank">Old Reddit</a>
+  <a href="https://archiveofourown.org" target="_blank">Archive of Our Own</a>
+  <a href="https://www.dictionary.com" target="_blank">Dictionary.com</a>
+  <a href="https://www.thesaurus.com" target="_blank">Thesaurus.com</a>
+</div>
+
+<h2>Cozy Puzzle Menu</h2>
 <div class="section">
   <button onclick="showPuzzle('wordle')">Wordle</button>
   <button onclick="showPuzzle('crossword')">Crossword</button>
@@ -184,161 +182,127 @@
   <button onclick="showPuzzle('sudoku')">Sudoku</button>
 </div>
 
-<div id="screen" class="section">✧ Tap a puzzle above to begin ✧</div>
+<div id="screen" class="section">✦ Tap a puzzle above to begin ✦</div>
 
-<h1>Kindle Dashboard</h1>
-<div class="menu">
-  <a class="btn" href="https://www.google.com" target="_blank">Search Engine</a>
-  <a class="btn" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a>
-  <a class="btn" href="https://old.reddit.com" target="_blank">Old Reddit</a>
-  <a class="btn" href="https://archiveofourown.org" target="_blank">Archive of Our Own</a>
-  <a class="btn" href="https://www.merriam-webster.com" target="_blank">Dictionary</a>
-  <a class="btn" href="https://www.thesaurus.com" target="_blank">Thesaurus</a>
-</div>
-
-<div class="section">
-  <h2>Quick Notes</h2>
-  <textarea id="noteArea"></textarea>
-  <button onclick="saveNote()">Save</button>
-  <div id="noteSavedMsg"></div>
-</div>
-
-<button id="toggleDark">Toggle Dark Mode</button>
+<div class="divider"></div>
+<div class="decor-bottom glyph">✦ ✧ ✦</div>
 
 <script>
-const sparkles = 40;
-const sparkleChars = ['✦','✧','❂','✺','✹','✵','✷'];
-for(let i=0;i<sparkles;i++){
-  const s = document.createElement('span');
-  s.className='sparkle';
-  s.textContent = sparkleChars[Math.floor(Math.random()*sparkleChars.length)];
-  s.style.left = Math.random()*100+'%';
-  s.style.top = Math.random()*200+'%';
-  s.style.fontSize = (Math.random()*10+8)+'px';
-  document.body.appendChild(s);
-}
+const toggle = document.createElement('button');
+toggle.innerText = "Toggle Dark Mode";
+document.body.appendChild(toggle);
+toggle.onclick = ()=>document.body.classList.toggle('dark');
 
-const glyphs = ['☾','★','✿','❀','☄','♛','♕','❁','✧','⚝'];
-for(let i=0;i<30;i++){
-  const g = document.createElement('span');
-  g.className='glyph';
-  g.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
-  g.style.position='absolute';
-  g.style.left=Math.random()*100+'%';
-  g.style.top=Math.random()*100+'%';
-  g.style.fontSize=(Math.random()*12+6)+'px';
-  document.body.appendChild(g);
-}
-
-document.getElementById('toggleDark').onclick = ()=>{
-  document.body.classList.toggle('dark');
-};
-
-function renderGrid(rows, cols=rows) {
-  let html = '<div class="puzzle-grid">';
-  for (let r=0;r<rows;r++){
-    for (let c=0;c<cols;c++){
-      html += `<input class="puzzle-input" maxlength="1" oninput="moveNext(this)">`;
+/* --- UNIVERSAL INPUT GRID --- */
+function renderGrid(rows, cols = rows) {
+  const container = document.createElement('div');
+  container.className = 'puzzle-grid';
+  container.style.gridTemplateColumns = `repeat(${cols}, 2rem)`;
+  const inputs = [];
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const input = document.createElement('input');
+      input.maxLength = 1;
+      input.className = 'puzzle-input';
+      input.addEventListener('input', e=>{
+        const idx = inputs.indexOf(input);
+        if(idx<inputs.length-1) inputs[idx+1].focus();
+      });
+      container.appendChild(input);
+      inputs.push(input);
     }
   }
-  html += '</div>';
-  return html;
+  return container;
 }
 
-function moveNext(el){
-  if(el.value.length >= 1){
-    const form = el.parentElement;
-    const inputs = Array.from(form.querySelectorAll('input'));
-    const idx = inputs.indexOf(el);
-    if(idx < inputs.length-1) inputs[idx+1].focus();
-    else checkPuzzleCompletion(form);
+/* --- RANDOM WORD GENERATION --- */
+function randomWord(len) {
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  let word = '';
+  for(let i=0;i<len;i++){
+    word += letters[Math.floor(Math.random()*26)];
   }
+  return word;
 }
 
-const DICTIONARY = ["abandon","ability","absorb","abstract","academy","accent","access","accuse","achieve","across","action","active","actual","advice","affect","afford","against","agency","agenda","almost","already","amazing","amount","animal","annual","answer","anxiety","anybody","anymore","applied","around","arrive","artist","aspect","assume","athlete","attempt","attend","author","avenue","balance","beauty","because","become","before","behind","belief","belong","benefit","better","beyond","bicycle","binding","bitter","black","blame","blanket","blend","bless","bliss","board","border","borrow","bottle","bottom","breeze","bright","broken","budget","builder","cabin","candle","capture","career","careful","castle","casual","caution","ceiling","center","chance","change","charge","charity","chase","choice","choose","circle","classic","clean"];
-
-function randomWord(length=5){
-  const pool = DICTIONARY.filter(w => w.length === length);
-  return pool[Math.floor(Math.random()*pool.length)];
+/* --- PUZZLE GENERATORS --- */
+function generateWordle() {
+  return randomWord(5);
 }
 
-let currentPuzzleType = '';
+function generateCrossword() {
+  const words = [];
+  for(let i=0;i<5;i++) words.push(randomWord(5).toUpperCase());
+  return words;
+}
 
+function generateConnections() {
+  const sets = [
+    ["APPLE","PEAR","PLUM","BERRY"],
+    ["MUG","BOOK","SOCKS","BLANKET"],
+    ["MOSS","LEAF","STONE","STREAM"],
+    ["MOON","STAR","CLOUD","DAWN"]
+  ];
+  return sets[Math.floor(Math.random()*sets.length)];
+}
+
+function generateWordSearch() {
+  const grid = Array.from({length:10},()=>Array.from({length:10},()=>String.fromCharCode(65+Math.floor(Math.random()*26))));
+  return {words:[randomWord(3).toUpperCase(),randomWord(4).toUpperCase(),randomWord(5).toUpperCase(),randomWord(5).toUpperCase(),randomWord(4).toUpperCase()], grid};
+}
+
+function generateSudoku() {
+  const boards = [
+    [
+      [5,3,0,0,7,0,0,0,0],
+      [6,0,0,1,9,5,0,0,0],
+      [0,9,8,0,0,0,0,6,0],
+      [8,0,0,0,6,0,0,0,3],
+      [4,0,0,8,0,3,0,0,1],
+      [7,0,0,0,2,0,0,0,6],
+      [0,6,0,0,0,0,2,8,0],
+      [0,0,0,4,1,9,0,0,5],
+      [0,0,0,0,8,0,0,7,9]
+    ]
+  ];
+  return boards[Math.floor(Math.random()*boards.length)];
+}
+
+/* --- SHOW PUZZLE --- */
 function showPuzzle(type){
-  currentPuzzleType = type;
   const screen = document.getElementById('screen');
   screen.innerHTML = '';
-  const puzzleContainer = document.createElement('div');
-  puzzleContainer.style.textAlign = 'center';
-  let content='';
-
+  let puzzleContainer;
   if(type==='wordle'){
-    for(let i=0;i<6;i++){ content += renderGrid(1,5); }
+    puzzleContainer = renderGrid(6,5);
+  } else if(type==='crossword'){
+    const words = generateCrossword();
+    puzzleContainer = renderGrid(words.length, words[0].length);
+  } else if(type==='connections'){
+    puzzleContainer = renderGrid(4,4);
+  } else if(type==='wordsearch'){
+    puzzleContainer = renderGrid(10,10);
+    const ws = generateWordSearch();
+    const wordsDiv = document.createElement('div');
+    wordsDiv.innerText = 'Words: ' + ws.words.join(', ');
+    screen.appendChild(wordsDiv);
+  } else if(type==='sudoku'){
+    puzzleContainer = renderGrid(9,9);
   }
-  if(type==='crossword'){
-    let gridWords=[];
-    for(let i=0;i<5;i++){ gridWords.push(randomWord(5).toUpperCase()); }
-    gridWords.forEach(w=>{
-      let row = '';
-      for(let ch of w) row += `<input class="puzzle-input" maxlength="1" oninput="moveNext(this)">`;
-      content += `<div>${row}</div>`;
-    });
-  }
-  if(type==='connections'){
-    let words=[];
-    for(let i=0;i<16;i++) words.push(randomWord().toUpperCase());
-    content=`<div>${words.sort(()=>Math.random()-0.5).join(" • ")}</div>`;
-  }
-  if(type==='wordsearch'){
-    let words=[];
-    for(let i=0;i<5;i++) words.push(randomWord(Math.floor(Math.random()*4)+3).toUpperCase());
-    for(let r=0;r<10;r++){
-      let row='';
-      for(let c=0;c<10;c++) row += `<input class="puzzle-input" maxlength="1">`;
-      content += `<div>${row}</div>`;
-    }
-    content += `<div>Words: ${words.join(', ')}</div>`;
-  }
-  if(type==='sudoku'){
-    for(let r=0;r<9;r++){
-      let row='';
-      for(let c=0;c<9;c++) row += `<input class="puzzle-input" maxlength="1">`;
-      content += `<div>${row}</div>`;
-    }
-  }
+  if(puzzleContainer) screen.appendChild(puzzleContainer);
 
-  const fullBtn = document.createElement('button');
-  fullBtn.textContent='Fullscreen';
-  fullBtn.onclick=()=>{ screen.classList.toggle('fullscreen'); };
+  // Add fullscreen and reset buttons
+  const fullscreenBtn = document.createElement('button');
+  fullscreenBtn.innerText = 'Fullscreen';
+  fullscreenBtn.onclick = ()=>puzzleContainer.requestFullscreen();
+  screen.appendChild(fullscreenBtn);
 
   const resetBtn = document.createElement('button');
-  resetBtn.textContent='Reset';
-  resetBtn.onclick=()=>{ showPuzzle(currentPuzzleType); };
-
-  puzzleContainer.innerHTML = content + '<div class="completion-msg" id="completionMsg"></div>';
-  puzzleContainer.appendChild(fullBtn);
-  puzzleContainer.appendChild(resetBtn);
-  screen.appendChild(puzzleContainer);
-}
-
-function checkPuzzleCompletion(form){
-  // simplified completion check: if all inputs filled
-  const inputs = form.querySelectorAll('input');
-  const completed = Array.from(inputs).every(i=>i.value.trim().length>0);
-  const msg = document.getElementById('completionMsg');
-  if(completed) msg.textContent = '✨ Puzzle Completed! ✨';
-  else msg.textContent = '';
-}
-
-/* NOTES */
-const noteArea = document.getElementById("noteArea");
-const saved = localStorage.getItem("kindleNote");
-if (saved) noteArea.value = saved;
-
-function saveNote(){
-  localStorage.setItem("kindleNote", noteArea.value);
-  document.getElementById("noteSavedMsg").innerText = "Saved.";
+  resetBtn.innerText = 'Reset';
+  resetBtn.onclick = ()=>showPuzzle(type);
+  screen.appendChild(resetBtn);
 }
 </script>
 </body>
 </html>
+
