@@ -14,7 +14,7 @@
     margin: auto;
     line-height: 1.6;
     position: relative;
-    overflow-x: hidden;
+    text-align: center;
   }
 
   /* Subtle whimsical repeating background pattern */
@@ -49,17 +49,18 @@
     border-radius: 12px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: relative;
+    text-align: center;
   }
 
   button {
-    width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.6rem;
+    padding: 0.5rem 0.8rem;
     border-radius: 10px;
     border: none;
     background: #e8e0d1;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin: 0.3rem;
+    cursor: pointer;
   }
 
   #screen {
@@ -69,21 +70,11 @@
     border-radius: 8px;
     border: 1px solid #ded6c5;
     min-height: 2rem;
-    text-align: center;
     position: relative;
     overflow: auto;
     max-height: 400px;
+    text-align: center;
   }
-
-  .ascii-corner {
-    font-size: 0.8rem;
-    opacity: 0.5;
-    position: absolute;
-  }
-  .ascii-top-left { top: 6px; left: 6px; }
-  .ascii-top-right { top: 6px; right: 6px; }
-  .ascii-bottom-left { bottom: 6px; left: 6px; }
-  .ascii-bottom-right { bottom: 6px; right: 6px; }
 
   input.puzzle-input {
     width: 1.4rem;
@@ -139,14 +130,16 @@
   }
 
   .glyph {
-    position: absolute;
-    font-size: 0.9rem;
+    font-size: 1rem;
     opacity: 0.25;
     pointer-events: none;
+    display: inline-block;
+    margin: 0 0.2rem;
   }
 
   .puzzle-grid {
     display: inline-block;
+    text-align: center;
   }
 
   #screen.fullscreen {
@@ -163,26 +156,57 @@
     overflow: auto;
   }
 
-  .centered-text {
-    text-align: center;
-  }
-
-  /* Notes textarea left-aligned */
   #noteArea {
-    width: 100%;
+    width: 90%;
     height: 120px;
     font-size: 16px;
     border: 1px solid #000;
     display: block;
-    margin-bottom: 0.5rem;
+    margin: auto;
+  }
+
+  .completion-msg {
+    margin-top: 0.5rem;
+    font-weight: bold;
   }
 </style>
 </head>
 <body>
-<button id="toggleDark" style="margin-bottom:1rem;">Toggle Dark Mode</button>
+
+<div class="glyph">☾</div><div class="glyph">★</div><div class="glyph">✿</div>
+
+<h2>✧ Cozy Puzzle Menu ✧</h2>
+<div class="section">
+  <button onclick="showPuzzle('wordle')">Wordle</button>
+  <button onclick="showPuzzle('crossword')">Crossword</button>
+  <button onclick="showPuzzle('connections')">Connections</button>
+  <button onclick="showPuzzle('wordsearch')">Word Search</button>
+  <button onclick="showPuzzle('sudoku')">Sudoku</button>
+</div>
+
+<div id="screen" class="section">✧ Tap a puzzle above to begin ✧</div>
+
+<h1>Kindle Dashboard</h1>
+<div class="menu">
+  <a class="btn" href="https://www.google.com" target="_blank">Search Engine</a>
+  <a class="btn" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a>
+  <a class="btn" href="https://old.reddit.com" target="_blank">Old Reddit</a>
+  <a class="btn" href="https://archiveofourown.org" target="_blank">Archive of Our Own</a>
+  <a class="btn" href="https://www.merriam-webster.com" target="_blank">Dictionary</a>
+  <a class="btn" href="https://www.thesaurus.com" target="_blank">Thesaurus</a>
+</div>
+
+<div class="section">
+  <h2>Quick Notes</h2>
+  <textarea id="noteArea"></textarea>
+  <button onclick="saveNote()">Save</button>
+  <div id="noteSavedMsg"></div>
+</div>
+
+<button id="toggleDark">Toggle Dark Mode</button>
 
 <script>
-const sparkles = 60;
+const sparkles = 40;
 const sparkleChars = ['✦','✧','❂','✺','✹','✵','✷'];
 for(let i=0;i<sparkles;i++){
   const s = document.createElement('span');
@@ -195,62 +219,20 @@ for(let i=0;i<sparkles;i++){
 }
 
 const glyphs = ['☾','★','✿','❀','☄','♛','♕','❁','✧','⚝'];
-for(let i=0;i<40;i++){
+for(let i=0;i<30;i++){
   const g = document.createElement('span');
   g.className='glyph';
   g.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+  g.style.position='absolute';
   g.style.left=Math.random()*100+'%';
-  g.style.top=Math.random()*200+'%';
+  g.style.top=Math.random()*100+'%';
   g.style.fontSize=(Math.random()*12+6)+'px';
   document.body.appendChild(g);
 }
-</script>
 
-<div class="ascii-corner ascii-top-left">🍄</div>
-<div class="ascii-corner ascii-top-right">🌿</div>
-<div class="ascii-corner ascii-bottom-left">📚</div>
-<div class="ascii-corner ascii-bottom-right">🌙</div>
-
-<div class="decor-top">✧･ﾟ: *✧*:･ﾟ✧</div>
-<div class="divider">✦ ✦ ✦</div>
-
-<h2 class="centered-text" style="text-align:center; margin-top:1rem;">✧ Cozy Puzzle Menu ✧</h2>
-<div class="section centered-text">
-  <button onclick="showPuzzle('wordle')">Wordle</button>
-  <button onclick="showPuzzle('crossword')">Crossword</button>
-  <button onclick="showPuzzle('connections')">Connections</button>
-  <button onclick="showPuzzle('wordsearch')">Word Search</button>
-  <button onclick="showPuzzle('sudoku')">Sudoku</button>
-  <button onclick="toggleFullscreen()">Toggle Fullscreen</button>
-</div>
-
-<div id="screen" class="section centered-text">✧ Tap a puzzle above to begin ✧</div>
-
-<h1 class="centered-text">Kindle Dashboard</h1>
-<div class="menu">
-  <a class="btn" href="https://www.google.com" target="_blank">Search Engine</a>
-  <a class="btn" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a>
-  <a class="btn" href="https://old.reddit.com" target="_blank">Old Reddit</a>
-  <a class="btn" href="https://archiveofourown.org" target="_blank">Archive of Our Own</a>
-  <a class="btn" href="https://www.merriam-webster.com" target="_blank">Dictionary</a>
-  <a class="btn" href="https://www.thesaurus.com" target="_blank">Thesaurus</a>
-</div>
-
-<div class="section">
-  <h2 class="centered-text">Quick Notes</h2>
-  <textarea id="noteArea"></textarea>
-  <button onclick="saveNote()">Save</button>
-  <div id="noteSavedMsg" class="centered-text"></div>
-</div>
-
-<script>
-const toggle = document.getElementById('toggleDark');
-toggle.onclick = ()=>{ document.body.classList.toggle('dark'); };
-
-function toggleFullscreen() {
-  const screen = document.getElementById('screen');
-  screen.classList.toggle('fullscreen');
-}
+document.getElementById('toggleDark').onclick = ()=>{
+  document.body.classList.toggle('dark');
+};
 
 function renderGrid(rows, cols=rows) {
   let html = '<div class="puzzle-grid">';
@@ -269,6 +251,7 @@ function moveNext(el){
     const inputs = Array.from(form.querySelectorAll('input'));
     const idx = inputs.indexOf(el);
     if(idx < inputs.length-1) inputs[idx+1].focus();
+    else checkPuzzleCompletion(form);
   }
 }
 
@@ -279,52 +262,72 @@ function randomWord(length=5){
   return pool[Math.floor(Math.random()*pool.length)];
 }
 
+let currentPuzzleType = '';
+
 function showPuzzle(type){
+  currentPuzzleType = type;
   const screen = document.getElementById('screen');
+  screen.innerHTML = '';
+  const puzzleContainer = document.createElement('div');
+  puzzleContainer.style.textAlign = 'center';
+  let content='';
+
   if(type==='wordle'){
-    let grid='';
-    for(let i=0;i<6;i++){ grid += renderGrid(1,5); }
-    screen.innerHTML = '<h3 class="centered-text">Wordle</h3>' + grid;
-    return;
+    for(let i=0;i<6;i++){ content += renderGrid(1,5); }
   }
   if(type==='crossword'){
     let gridWords=[];
     for(let i=0;i<5;i++){ gridWords.push(randomWord(5).toUpperCase()); }
-    screen.innerHTML='<h3 class="centered-text">Mini Crossword</h3>';
     gridWords.forEach(w=>{
       let row = '';
       for(let ch of w) row += `<input class="puzzle-input" maxlength="1" oninput="moveNext(this)">`;
-      screen.innerHTML += `<div class="centered-text">${row}</div>`;
+      content += `<div>${row}</div>`;
     });
-    return;
   }
   if(type==='connections'){
     let words=[];
     for(let i=0;i<16;i++) words.push(randomWord().toUpperCase());
-    screen.innerHTML=`<h3 class="centered-text">Connections</h3><div class="centered-text">${words.sort(()=>Math.random()-0.5).join(" • ")}</div>`;
-    return;
+    content=`<div>${words.sort(()=>Math.random()-0.5).join(" • ")}</div>`;
   }
   if(type==='wordsearch'){
     let words=[];
     for(let i=0;i<5;i++) words.push(randomWord(Math.floor(Math.random()*4)+3).toUpperCase());
-    screen.innerHTML='<h3 class="centered-text">Word Search</h3>';
     for(let r=0;r<10;r++){
       let row='';
       for(let c=0;c<10;c++) row += `<input class="puzzle-input" maxlength="1">`;
-      screen.innerHTML += `<div class="centered-text">${row}</div>`;
+      content += `<div>${row}</div>`;
     }
-    screen.innerHTML += `<div class="centered-text">Words: ${words.join(', ')}</div>`;
-    return;
+    content += `<div>Words: ${words.join(', ')}</div>`;
   }
   if(type==='sudoku'){
-    screen.innerHTML='<h3 class="centered-text">Sudoku</h3>';
     for(let r=0;r<9;r++){
       let row='';
       for(let c=0;c<9;c++) row += `<input class="puzzle-input" maxlength="1">`;
-      screen.innerHTML += `<div class="centered-text">${row}</div>`;
+      content += `<div>${row}</div>`;
     }
-    return;
   }
+
+  const fullBtn = document.createElement('button');
+  fullBtn.textContent='Fullscreen';
+  fullBtn.onclick=()=>{ screen.classList.toggle('fullscreen'); };
+
+  const resetBtn = document.createElement('button');
+  resetBtn.textContent='Reset';
+  resetBtn.onclick=()=>{ showPuzzle(currentPuzzleType); };
+
+  puzzleContainer.innerHTML = content + '<div class="completion-msg" id="completionMsg"></div>';
+  puzzleContainer.appendChild(fullBtn);
+  puzzleContainer.appendChild(resetBtn);
+  screen.appendChild(puzzleContainer);
+}
+
+function checkPuzzleCompletion(form){
+  // simplified completion check: if all inputs filled
+  const inputs = form.querySelectorAll('input');
+  const completed = Array.from(inputs).every(i=>i.value.trim().length>0);
+  const msg = document.getElementById('completionMsg');
+  if(completed) msg.textContent = '✨ Puzzle Completed! ✨';
+  else msg.textContent = '';
 }
 
 /* NOTES */
