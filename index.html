@@ -1,201 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>📖 Enchanted Kindle Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magical Cozy Kindle Tablet</title>
 <style>
-  /* === GENERAL BODY === */
-  body {
-    font-family: "Garamond", serif;
-    background: #fff;
-    color: #000;
-    max-width: 600px;
-    margin: auto;
-    padding: 1rem;
-    line-height: 1.6;
-  }
-
-  h1, h2, h3 {
-    text-align: center;
-    margin: 0.5rem 0;
-    font-family: "Garamond", serif;
-  }
-
-  .section {
-    padding: 1rem;
-    margin: 1.2rem 0;
-    border: 2px dotted #000;
-    border-radius: 12px;
-    position: relative;
-    background: #fff;
-  }
-
-  .section::before, .section::after {
-    position: absolute;
-    font-size: 1.2rem;
-    opacity: 0.2;
-  }
-  .section::before { content: "✧"; top: 4px; left: 6px; }
-  .section::after { content: "✦"; bottom: 4px; right: 6px; }
-
-  button {
-    width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.6rem;
-    border-radius: 10px;
-    border: 1px solid #000;
-    background: transparent;
-    font-family: "Garamond", serif;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-
-  a {
-    text-decoration: none;
-    color: #000;
-  }
-  a:hover { text-decoration: underline; }
-
-  #screen {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 1px dashed #000;
-    min-height: 4rem;
-    font-style: italic;
-  }
-
-  .puzzle-grid input {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.4rem;
-    text-align: center;
-    margin: 0.1rem;
-    border: 1px solid #000;
-  }
-
-  textarea {
-    width: 100%;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    border: 1px dashed #000;
-    font-family: "Garamond", serif;
-    font-style: italic;
-  }
-
-  /* Decorative flourishes */
-  .divider {
-    text-align: center;
-    font-size: 1.4rem;
-    opacity: 0.3;
-    margin: 1rem 0;
-  }
-
-  .ethereal {
-    text-align: center;
-    font-style: italic;
-    opacity: 0.5;
-    margin: 0.8rem 0;
-  }
-
-  .magical-box {
-    border: 2px dotted #000;
-    padding: 0.8rem;
-    margin-top: 1rem;
-    border-radius: 10px;
-  }
-
-  /* Floating ASCII symbols */
-  .float-symbols {
-    text-align: center;
-    font-size: 1.2rem;
-    opacity: 0.2;
-    margin: 0.2rem 0;
-  }
+/* === Base === */
+body {
+  font-family: "Georgia", serif;
+  background:#f7f5f0; color:#000;
+  margin:0; padding:1rem; max-width:600px; line-height:1.5;
+}
+h1,h2,h3 { text-align:center; font-family:"Garamond",serif; margin-bottom:0.5rem; }
+.section { background:#fffaf3; border:2px solid #e5dccb; padding:1rem; margin:1rem 0; border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,0.1); border-image: repeating-linear-gradient(to bottom,#e5dccb,#e5dccb 6px,#f7f5f0 6px,#f7f5f0 12px) 1; }
+button { width:100%; margin-top:0.5rem; padding:0.6rem; border-radius:10px; border:none; background:#e8e0d1; font-family:inherit; font-size:1rem; cursor:pointer; }
+.puzzle-grid { display:grid; grid-gap:2px; margin:0.5rem 0; }
+.puzzle-input { width:2rem; height:2rem; text-align:center; font-size:1rem; border:1px solid #aaa; background:#fffaf3; font-family:inherit; }
+.decor-top,.decor-bottom { text-align:center; font-size:1.2rem; opacity:0.5; margin:0.5rem 0; }
+.divider { text-align:center; opacity:0.3; letter-spacing:4px; margin:1rem 0; }
+.glimmer { text-align:center; font-size:1rem; opacity:0.5; margin:0.5rem 0; }
+body.dark { background:#1a1a1a; color:#e6e6e6; }
+body.dark .section { background:#2a2a2a; border-color:#555; }
+body.dark button { background:#3a3a3a; color:#e6e6e6; }
+.link-list a { display:block; margin:0.3rem 0; text-decoration:none; color:inherit; border-bottom:1px dashed #aaa; padding-bottom:2px; }
+.moon-header::before { content:"🌑 🌒 🌓 🌔 🌕"; display:block; text-align:center; opacity:0.3; margin-bottom:0.3rem; }
+/* Mini Calendar */
+.calendar { font-size:0.9rem; text-align:center; line-height:1.2; }
+/* Dice Roller */
+.dice-display { font-size:2rem; text-align:center; margin:0.5rem 0; }
+/* Falling leaves */
+.leaf { display:inline-block; opacity:0.3; animation:fall 3s linear infinite; }
+@keyframes fall { 0% { transform: translateY(0px) rotate(0deg); } 100% { transform: translateY(100px) rotate(360deg); } }
+/* Fortune Cookie */
+.fortune { text-align:center; font-style:italic; opacity:0.6; margin-top:0.5rem; }
+/* Ambient stars */
+.star { display:inline-block; opacity:0.3; animation:twinkle 2s linear infinite alternate; font-size:1rem; }
+@keyframes twinkle { 0% {opacity:0.2;} 50%{opacity:0.5;} 100%{opacity:0.2;} }
+/* Dropcaps */
+.dropcap:first-letter { font-size:2.4rem; float:left; padding-right:6px; padding-top:2px; font-family:"Garamond",serif; color:#4a3b3b; }
 </style>
 </head>
 <body>
 
-<div class="divider">🌙 ✦ ✧ 🌙</div>
-<h1>🔮 Enchanted Kindle Dashboard</h1>
-<div class="divider">✦ ✧ ✦</div>
+<div class="decor-top">✧･ﾟ: *✧*:･ﾟ✧</div>
+<div class="divider">✦ ✦ ✦</div>
 
-<h2>🧩 Cozy Puzzle Menu</h2>
-<div class="section magical-box">
-  <button onclick="showPuzzle('wordle')">Wordle</button>
-  <button onclick="showPuzzle('crossword')">Crossword</button>
-  <button onclick="showPuzzle('connections')">Connections</button>
-  <button onclick="showPuzzle('wordsearch')">Word Search</button>
-  <button onclick="showPuzzle('sudoku')">Sudoku</button>
+<h1>🕯 Magical Cozy Kindle Tablet 🕯</h1>
+<button id="toggleDark">Toggle Dark Mode</button>
+
+<!-- Puzzles & Games -->
+<div class="section">
+<h2>🧩 Puzzles & Games</h2>
+<button onclick="showPuzzle('wordle')">Wordle</button>
+<button onclick="showPuzzle('crossword')">Mini Crossword</button>
+<button onclick="showPuzzle('connections')">Connections</button>
+<button onclick="showPuzzle('wordsearch')">Word Search</button>
+<button onclick="showPuzzle('sudoku')">Sudoku</button>
 </div>
 
-<div id="screen" class="section ethereal">Tap a puzzle above to begin ✧</div>
+<div id="screen" class="section"><p>Tap a puzzle above to begin ✧</p></div>
+<div class="glimmer">✨ Tap for a little magic ✧</div>
 
-<div class="float-symbols">✦ ✧ ✦ ✧ ✦ ✧</div>
-
-<h2>Quick Notes 📝</h2>
-<div class="section magical-box">
-  <textarea id="noteArea" placeholder="Write your thoughts here..."></textarea>
-  <button onclick="saveNote()">Save</button>
-  <div id="noteSavedMsg" class="ethereal"></div>
+<!-- Cozy Links -->
+<div class="section">
+<h2>📚 Cozy Links</h2>
+<div class="link-list">
+<a href="https://lite.duckduckgo.com" target="_blank">DuckDuckGo Lite</a>
+<a href="https://en.m.wikipedia.org" target="_blank">Wikipedia</a>
+<a href="https://old.reddit.com" target="_blank">Old Reddit</a>
+<a href="https://archiveofourown.org" target="_blank">Archive of Our Own</a>
+<a href="https://www.projectgutenberg.org" target="_blank">Project Gutenberg</a>
+<a href="https://www.merriam-webster.com" target="_blank">Dictionary</a>
+<a href="https://www.thesaurus.com" target="_blank">Thesaurus</a>
+</div>
 </div>
 
-<div class="float-symbols">🌙 ✦ 🌿 ✦ 🌙</div>
-
-<h2>Magical Web Links ✨</h2>
-<div class="section magical-box">
-  <ul>
-    <li><a href="https://www.duckduckgo.com" target="_blank">DuckDuckGo</a></li>
-    <li><a href="https://en.wikipedia.org" target="_blank">Wikipedia</a></li>
-    <li><a href="https://old.reddit.com" target="_blank">Old Reddit</a></li>
-    <li><a href="https://archiveofourown.org" target="_blank">Archive of Our Own</a></li>
-    <li><a href="https://www.projectgutenberg.org" target="_blank">Project Gutenberg</a></li>
-  </ul>
+<!-- Quick Notes -->
+<div class="section">
+<h2>📝 Quick Notes</h2>
+<textarea id="noteArea" style="width:100%;height:100px;font-size:16px;border:1px solid #000;"></textarea>
+<button onclick="saveNote()">Save</button>
+<div id="noteSavedMsg"></div>
 </div>
 
-<div class="divider">✧ ✦ ✧ ✦ ✧</div>
+<!-- Oracle & Fortune Cookie -->
+<div class="section">
+<h2>🔮 Mystical Widgets</h2>
+<button onclick="prophecy()">Reveal Oracle Message</button>
+<div id="oracleScreen" style="margin-top:0.5rem;"></div>
+<button onclick="fortune()">Open Fortune Cookie</button>
+<div id="fortuneScreen" class="fortune"></div>
+</div>
+
+<!-- Calendar & Dice -->
+<div class="section">
+<h2>📅 Mini Calendar & 🎲 Dice Roller</h2>
+<div id="calendar" class="calendar"></div>
+<button onclick="rollDice()">Roll 1d6</button>
+<div id="dice" class="dice-display"></div>
+</div>
+
+<!-- Falling Leaves & Ambient Stars -->
+<div class="section">
+<h2>🍂 Falling Leaves & ✨ Ambient Stars</h2>
+<div id="leaves"></div>
+<div id="stars" style="margin-top:0.5rem;"></div>
+</div>
+
+<div class="decor-bottom">❧ ✧ ❧</div>
 
 <script>
-/* NOTES */
-const noteArea = document.getElementById("noteArea");
-const saved = localStorage.getItem("kindleNote");
-if(saved) noteArea.value = saved;
+/* === Dark Mode === */
+document.getElementById('toggleDark').onclick = ()=>document.body.classList.toggle('dark');
 
-function saveNote(){
-  localStorage.setItem("kindleNote", noteArea.value);
-  document.getElementById("noteSavedMsg").innerText = "Saved.";
-}
+/* === Notes === */
+const noteArea=document.getElementById("noteArea");
+const savedNote=localStorage.getItem("kindleNote");
+if(savedNote) noteArea.value=savedNote;
+function saveNote(){localStorage.setItem("kindleNote",noteArea.value);document.getElementById("noteSavedMsg").innerText="Saved ✧";}
 
-/* PUZZLES */
-function renderGrid(rows, cols = rows) {
-  let html = '<div class="puzzle-grid">';
-  for(let r=0;r<rows;r++){
-    for(let c=0;c<cols;c++){
-      html += '<input maxlength="1">';
-    }
-  }
-  html += '</div>';
-  return html;
-}
+/* === Oracle & Fortune === */
+const oracleMessages=[
+'🔮 A gentle day approaches you — softer than expected.',
+'🍵 You will soon find a small delight that feels enormous.',
+'📖 A story on your shelf wishes to soothe your mind today.',
+'🌧 Rain will feel different this week — watch closely.',
+'🪄 You will remember a forgotten joy.'
+];
+function prophecy(){const msg=oracleMessages[Math.floor(Math.random()*oracleMessages.length)];document.getElementById('oracleScreen').innerText=msg;}
 
-function showPuzzle(name){
-  const screen = document.getElementById('screen');
-  if(name === 'wordle'){
-    screen.innerHTML = `<h3>Wordle ✦</h3>${renderGrid(6,5)}`;
-  } else if(name === 'crossword'){
-    screen.innerHTML = `<h3 class="moon-header">Crossword ✦</h3>${renderGrid(5,5)}`;
-  } else if(name === 'connections'){
-    screen.innerHTML = `<h3>Connections ✦</h3>${renderGrid(4,4)}`;
-  } else if(name === 'wordsearch'){
-    screen.innerHTML = `<h3>Word Search ✦</h3>${renderGrid(10,10)}`;
-  } else if(name === 'sudoku'){
-    screen.innerHTML = `<h3>Sudoku ✦</h3>${renderGrid(9,9)}`;
-  }
+const fortuneMessages=[
+'🍪 You will discover a tiny joy hidden in plain sight.',
+'🍪 A cozy breeze will bring a moment of peace.',
+'🍪 Something magical will touch your heart today.'
+];
+function fortune(){const msg=fortuneMessages[Math.floor(Math.random()*fortuneMessages.length)];document.getElementById('fortuneScreen').innerText=msg;}
+
+/* === Mini Calendar === */
+function showCalendar(){const d=new Date();const m=d.getMonth()+1;const y=d.getFullYear();let txt=`${y} - ${m}\nSu Mo Tu We Th Fr Sa\n`; for(let i=1;i<=30;i++){txt+=((i<10?' '+i:i)+' ');} document.getElementById('calendar').innerText=txt;}
+showCalendar();
+
+/* === Dice Roller === */
+function rollDice(){const val=Math.floor(Math.random()*6)+1;document.getElementById('dice').innerText=val;}
+
+/* === Falling Leaves === */
+function generateLeaves(){const leaves=document.getElementById('leaves');for(let i=0;i<10;i++){const l=document.createElement('span');l.className='leaf';l.innerText='🍂';l.style.animationDelay=(i*0.5)+'s';leaves.appendChild(l);}}
+generateLeaves();
+
+/* === Ambient Stars === */
+function generateStars(){const stars=document.getElementById('stars');for(let i=0;i<15;i++){const s=document.createElement('span');s.className='star';s.innerText='✦ ';s.style.animationDelay=(i*0.2)+'s';stars.appendChild(s);}}
+generateStars();
+
+/* === Puzzles (Wordle, Crossword, Connections, Wordsearch, Sudoku) === */
+const WORDLE_LIST = ["moss","read","cozy","leaf","kindle","magic","quiet","soft","moon","glow"];
+function renderGrid(rows,cols=rows){let html='<div class="puzzle-grid" style="grid-template-columns: repeat('+cols+',2rem);">';for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){html+='<input class="puzzle-input" maxlength="1">';} } html+='</div>';return html;}
+function showPuzzle(name){const screen=document.getElementById('screen');if(name==='wordle'){let grid='';for(let i=0;i<6;i++) grid+=renderGrid(1,5); screen.innerHTML='<h3>Wordle</h3>'+grid+'<p style="text-align:center;">Guess the 5-letter word ✧</p>';} if(name==='crossword'){const words=[["APPLE","PLANT","LEMON","EAGLE","NESTS"],["MOONS","RIVER","EVERY","STORY","YEARN"],["QUIET","UNDER","NIGHT","GLOWN","TREES"]]; const choice=words[Math.floor(Math.random()*words.length)]; screen.innerHTML='<h3 class="moon-header">Mini Crossword</h3>'+renderGrid(choice.length,choice.length);} if(name==='connections'){const sets=[{groups:{fruits:["APPLE","PEAR","PLUM","BERRY"],cozy:["MUG","BOOK","SOCKS","BLANKET"],nature:["MOSS","LEAF","STONE","STREAM"],sky:["MOON","STAR","CLOUD","DAWN"]}},{groups:{colors:["RED","BLUE","GREEN","GOLD"],sounds:["HUM","TAP","BUZZ","RUSTLE"],weather:["RAIN","SNOW","WIND","FOG"],plants:["FERN","MINT","IVY","ROSE"]}}]; const set=sets[Math.floor(Math.random()*sets.length)]; const flat=Object.values(set.groups).flat(); screen.innerHTML='<h3>Connections</h3><p>Shuffle and find groups:</p><div>'+flat.sort(()=>Math.random()-0.5).join(' • ')+'</div>';} if(name==='wordsearch'){const words=["MOON","LEAF","GLOW","READ","MOSS"]; screen.innerHTML='<h3>Word Search</h3>'+renderGrid(10,10)+'<div>Words: '+words.join(', ')+'</div>';} if(name==='sudoku'){screen.innerHTML='<h3>Sudoku</h3>'+renderGrid(9,9);}
 }
 </script>
-
-<div class="divider">✧ ✦ ✧ ✦ ✧</div>
-<div class="ethereal">✨ Your Kindle dashboard glimmers with magic ✨</div>
-
 </body>
 </html>
