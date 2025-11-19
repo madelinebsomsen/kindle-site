@@ -14,27 +14,210 @@
     margin: auto;
     line-height: 1.6;
   }
-  h1,h2,h3 { font-family: "Garamond", serif; text-align:center; color:#4a3b3b; }
-  .section { background:#fffaf3; border:2px solid #e5dccb; margin:1.2rem 0; padding:1rem; border-radius:12px; box-shadow:0 2px 5px rgba(0,0,0,0.05); }
-  button { width:100%; margin-top:0.5rem; padding:0.6rem; border-radius:10px; border:none; background:#e8e0d1; font-family:inherit; font-size:1rem; cursor:pointer; }
-  a { color:inherit; text-decoration:none; }
-  #screen { margin-top:0.8rem; padding:0.8rem; background:#fdfaf5; border-radius:8px; border:1px solid #ded6c5; min-height:2rem; }
-  .divider{text-align:center;font-size:1rem;letter-spacing:4px;opacity:0.4;margin:1rem 0;}
-  .decor-top,.decor-bottom{text-align:center;font-size:1.4rem;opacity:0.6;margin:0.5rem 0;}
-  body.dark{background:#1a1a1a;color:#e6e6e6;}
-  body.dark .section{background:#2a2a2a;border-color:#444;}
-  body.dark button{background:#3a3a3a;color:#e6e6e6;}
-  select { margin-top:0.5rem; padding:0.3rem; font-size:1rem; }
-  .moon-header::before { content: "🌑 🌒 🌓 🌔 🌕"; display:block; text-align:center; opacity:0.5; margin-bottom:0.4rem;}
+
+  h1, h2, h3 {
+    font-family: "Garamond", serif;
+    text-align: center;
+    color: #4a3b3b;
+  }
+
+  .section {
+    background: #fffaf3;
+    border: 2px solid #e5dccb;
+    margin: 1.2rem 0;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  button {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: none;
+    background: #e8e0d1;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  #screen {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #fdfaf5;
+    border-radius: 8px;
+    border: 1px solid #ded6c5;
+    min-height: 2rem;
+  }
+
+  /* Whimsical Decorations */
+  .decor-top,
+  .decor-bottom {
+    text-align: center;
+    font-size: 1.4rem;
+    opacity: 0.6;
+    margin: 0.5rem 0;
+  }
+
+  .divider {
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    opacity: 0.4;
+    margin: 1rem 0;
+  }
+
+  /* Candle-style borders */
+  .section {
+    border: 2px solid #e5dccb;
+    border-image: repeating-linear-gradient(
+      to bottom,
+      #e5dccb,
+      #e5dccb 6px,
+      #f7f5f0 6px,
+      #f7f5f0 12px
+    ) 1;
+  }
+
+  /* Drop caps */
+  .dropcap:first-letter {
+    font-size: 2.4rem;
+    float: left;
+    padding-right: 6px;
+    padding-top: 2px;
+    font-family: "Garamond", serif;
+    color: #4a3b3b;
+  }
+
+  /* Moon phase headers */
+  .moon-header::before {
+    content: "🌑 🌒 🌓 🌔 🌕";
+    display: block;
+    text-align: center;
+    opacity: 0.5;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ASCII decorations */
+  .ascii-corner {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    position: absolute;
+  }
+  .ascii-top-left { top: 6px; left: 6px; }
+  .ascii-top-right { top: 6px; right: 6px; }
+  .ascii-bottom-left { bottom: 6px; left: 6px; }
+  .ascii-bottom-right { bottom: 6px; right: 6px; }
+
+  /* Glimmer-on-tap */
+  .glimmer {
+    text-align: center;
+    margin: 1rem 0;
+    opacity: 0.6;
+  }
+
+  /* Page-turn illusion */
+  .page-turn {
+    text-align: center;
+    font-size: 1.2rem;
+    opacity: 0.5;
+    margin: 1rem 0;
+  }
+
+  /* Storybook mode */
+  .storybook {
+    background: #fdfaf5;
+    border: 3px double #d9cbb2;
+    padding: 1rem;
+    border-radius: 14px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    font-family: "Garamond", serif;
+  }
+
+  /* Ritual mode */
+  .ritual {
+    background: #fffdf7;
+    border: 2px dashed #cbbfa8;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+  }
+
+  /* Oracle vibe */
+  .oracle {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #fefbf4;
+    border: 1px solid #e0d4c3;
+    margin-top: 1rem;
+  }
+
+  /* Woodland frame */
+  .woodland {
+    border: 6px solid #e6ddcc;
+    border-image: repeating-linear-gradient(
+      45deg,
+      #e6ddcc,
+      #e6ddcc 10px,
+      #d8cfbd 10px,
+      #d8cfbd 20px
+    ) 1;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  /* Dark mode */
+  body.dark {
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+  }
+  body.dark .section {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+  body.dark button {
+    background: #3a3a3a;
+    color: #e6e6e6;
+  }
+
+  /* Puzzle input grid */
+  .puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1.8rem);
+    gap: 0.2rem;
+    justify-content: center;
+    margin: 0.4rem 0;
+  }
+  .puzzle-input {
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+    font-family: "Garamond", serif;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background: #fdfaf5;
+  }
+  body.dark .puzzle-input {
+    background: #2a2a2a;
+    color: #e6e6e6;
+    border-color: #555;
+  }
 </style>
 </head>
 <body>
+
 <button id="toggleDark" style="margin-bottom:1rem;">Toggle Dark Mode</button>
+
+<div class="ascii-corner ascii-top-left">🍄</div>
+<div class="ascii-corner ascii-top-right">🌿</div>
+<div class="ascii-corner ascii-bottom-left">📚</div>
+<div class="ascii-corner ascii-bottom-right">🌙</div>
 
 <div class="decor-top">✧･ﾟ: *✧*:･ﾟ✧</div>
 <div class="divider">✦ ✦ ✦</div>
 
-<h2>🧩 Cozy Puzzle Menu</h2>
+<h2 style="text-align:center; margin-top:1rem;">🧩 Cozy Puzzle Menu</h2>
 <div class="section">
   <button onclick="showPuzzle('wordle')">Wordle</button>
   <button onclick="showPuzzle('crossword')">Crossword</button>
@@ -45,75 +228,155 @@
 
 <div id="screen" class="section">Tap a puzzle above to begin ✧</div>
 
-<h2>🔗 Useful Links</h2>
-<div class="section">
-  <p><a href="https://lite.wikipedia.org/" target="_blank">Wikipedia (Lite)</a></p>
-  <p><a href="https://old.reddit.com/" target="_blank">Reddit (Old)</a></p>
-  <p><a href="https://archiveofourown.org/" target="_blank">Archive of Our Own</a></p>
-  <p><a href="https://www.merriam-webster.com/" target="_blank">Dictionary</a></p>
-  <p><a href="https://www.thesaurus.com/" target="_blank">Thesaurus</a></p>
+<div class="glimmer">tap for a little magic ✧</div>
+<div class="page-turn">⇢ turn the page ⇠</div>
+<div class="oracle">🔮 your tiny oracle awaits</div>
+<div class="ritual">🕯 ritual mode ready</div>
+<div class="storybook">📖 storybook mode activated</div>
+<div class="woodland">🌲 wrapped in woodland magic</div>
+
+<h1>Kindle Dashboard</h1>
+
+<div class="menu">
+  <a class="btn" href="https://lite.duckduckgo.com/" target="_blank">Search Engine</a>
+  <a class="btn" href="https://en.m.wikipedia.org/" target="_blank">Wikipedia</a>
+  <a class="btn" href="https://old.reddit.com/" target="_blank">Old Reddit</a>
+  <a class="btn" href="https://archiveofourown.org/" target="_blank">Archive of Our Own</a>
+  <a class="btn" href="https://www.merriam-webster.com/" target="_blank">Dictionary</a>
+  <a class="btn" href="https://www.thesaurus.com/" target="_blank">Thesaurus</a>
 </div>
 
-<h2>✨ Horoscope</h2>
-<div class="section">
-  <label for="zodiac">Choose your sign:</label>
-  <select id="zodiac">
-    <option value="aries">Aries</option>
-    <option value="taurus">Taurus</option>
-    <option value="gemini">Gemini</option>
-    <option value="cancer">Cancer</option>
-    <option value="leo">Leo</option>
-    <option value="virgo">Virgo</option>
-    <option value="libra">Libra</option>
-    <option value="scorpio">Scorpio</option>
-    <option value="sagittarius">Sagittarius</option>
-    <option value="capricorn">Capricorn</option>
-    <option value="aquarius">Aquarius</option>
-    <option value="pisces">Pisces</option>
-  </select>
-  <p id="horoscopeMsg" style="margin-top:0.5rem; font-style:italic;">Your daily horoscope will appear here ✧</p>
+<!-- NOTES -->
+<div id="notes" class="section">
+  <h2>Quick Notes</h2>
+  <textarea id="noteArea" style="width:100%;height:120px;font-size:16px;border:1px solid #000;"></textarea>
+  <button onclick="saveNote()">Save</button>
+  <div id="noteSavedMsg"></div>
 </div>
-
-<div class="decor-bottom">❧ ✧ ❧</div>
 
 <script>
-// Dark mode toggle
-document.getElementById('toggleDark').onclick = ()=>{ document.body.classList.toggle('dark'); };
+  const noteArea = document.getElementById("noteArea");
+  const saved = localStorage.getItem("kindleNote");
+  if (saved) noteArea.value = saved;
 
-// --- PUZZLES ---
-function renderGrid(rows,cols=rows){
-  let html='<div class="puzzle-grid">';
-  for(let r=0;r<rows;r++){
-    for(let c=0;c<cols;c++){ html+='<input class="puzzle-input" maxlength="1" style="width:1.8em; text-align:center; margin:1px;">'; }
-    html+='<br>';
+  function saveNote(){
+    localStorage.setItem("kindleNote", noteArea.value);
+    document.getElementById("noteSavedMsg").innerText = "Saved.";
   }
-  html+='</div>'; return html;
-}
-function showPuzzle(name){
-  const screen=document.getElementById("screen");
-  if(name==='wordle'){
-    let grid=''; for(let i=0;i<6;i++){ grid+=renderGrid(1,5); }
-    screen.innerHTML='<h3>Wordle</h3>'+grid; return;
-  }
-  if(name==='crossword'){ screen.innerHTML='<h3 class="moon-header">Mini Crossword</h3>'+renderGrid(5,5); return; }
-  if(name==='connections'){ screen.innerHTML='<h3>Connections</h3>'+renderGrid(4,4); return; }
-  if(name==='wordsearch'){ screen.innerHTML='<h3>Word Search</h3>'+renderGrid(10,10); return; }
-  if(name==='sudoku'){ screen.innerHTML='<h3>Sudoku</h3>'+renderGrid(9,9); return; }
-}
-
-// --- HOROSCOPE ---
-function fetchHoroscope(sign){
-  fetch(`https://aztro.sameerkumar.website/?sign=${sign}&day=today`, {method:'POST'})
-    .then(res=>res.json())
-    .then(data=>{ document.getElementById("horoscopeMsg").innerText = data.description; })
-    .catch(err=>{ document.getElementById("horoscopeMsg").innerText = "Could not load horoscope."; });
-}
-// Load stored sign or default
-const zodiacSelect=document.getElementById("zodiac");
-let storedSign=localStorage.getItem("zodiac")||"aries";
-zodiacSelect.value=storedSign;
-fetchHoroscope(storedSign);
-zodiacSelect.onchange=function(){ localStorage.setItem("zodiac",this.value); fetchHoroscope(this.value); }
 </script>
+
+<script>
+/* === SIMPLE RANDOM PUZZLE GENERATORS (UPDATED) === */
+
+/* WORD LISTS */
+const WORDLE_LIST = ["moss","read","cozy","leaf","kindle","magic","quiet","soft","moon","glow"]; 
+
+const WORD_SEARCH_POOL = ["MOON","LEAF","GLOW","READ","MOSS","CLOUD","QUIET","STARS","WOODS","FAIRY"];
+
+const CROSSWORD_CLUES = [
+  ["MAPLE","ACORN","FERNS","MISTY","OWLET"],
+  ["WATER","STONE","BRIAR","CLOUD","RIVER"],
+  ["BERRY","MOSSY","LEMON","EARTH","NIGHT"]
+];
+
+/* UNIVERSAL GRID RENDER */
+function renderGrid(rows, cols = rows) {
+  let html = '<div class="puzzle-grid">';
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      html += '<input class="puzzle-input" maxlength="1">';
+    }
+  }
+  html += '</div>';
+  return html;
+}
+
+/* PUZZLE GENERATORS */
+function generateWordle() {
+  return WORDLE_LIST[Math.floor(Math.random()*WORDLE_LIST.length)];
+}
+
+function generateCrossword() {
+  const grids = [
+    ["APPLE","PLANT","LEMON","EAGLE","NESTS"],
+    ["MOONS","RIVER","EVERY","STORY","YEARN"],
+    ["QUIET","UNDER","NIGHT","GLOWN","TREES"]
+  ];
+  return grids[Math.floor(Math.random()*grids.length)];
+}
+
+function generateConnections() {
+  const sets = [
+    { groups: { fruits:["APPLE","PEAR","PLUM","BERRY"], cozy:["MUG","BOOK","SOCKS","BLANKET"], nature:["MOSS","LEAF","STONE","STREAM"], sky:["MOON","STAR","CLOUD","DAWN"] } },
+    { groups: { colors:["RED","BLUE","GREEN","GOLD"], sounds:["HUM","TAP","BUZZ","RUSTLE"], weather:["RAIN","SNOW","WIND","FOG"], plants:["FERN","MINT","IVY","ROSE"] } }
+  ];
+  return sets[Math.floor(Math.random()*sets.length)];
+}
+
+function generateWordSearch() {
+  let chosen = [...WORD_SEARCH_POOL].sort(() => Math.random() - 0.5).slice(0,5);
+  const grid = Array.from({length:10},()=>Array.from({length:10},()=>String.fromCharCode(65+Math.floor(Math.random()*26))));
+  return {words: chosen, grid};
+}
+
+function generateSudoku() {
+  const boards = [
+    [[5,3,0,0,7,0,0,0,0],[6,0,0,1,9,5,0,0,0],[0,9,8,0,0,0,0,6,0],[8,0,0,0,6,0,0,0,3],[4,0,0,8,0,3,0,0,1],[7,0,0,0,2,0,0,0,6],[0,6,0,0,0,0,2,8,0],[0,0,0,4,1,9,0,0,5],[0,0,0,0,8,0,0,7,9]],
+    [[0,2,0,6,0,8,0,0,0],[5,8,0,0,0,9,7,0,0],[0,0,0,0,4,0,0,0,0],[3,7,0,0,0,0,5,0,0],[6,0,0,0,0,0,0,0,4],[0,0,8,0,0,0,0,1,3],[0,0,0,0,2,0,0,0,0],[0,0,9,8,0,0,0,3,6],[0,0,0,3,0,6,0,9,0]]
+  ];
+  return boards[Math.floor(Math.random()*boards.length)];
+}
+
+/* === HOOK PUZZLES TO SCREEN === */
+function showPuzzle(type) {
+  const screen = document.getElementById("screen");
+
+  if(type === "wordle") {
+    let grid = '';
+    for(let i=0;i<6;i++){ grid += renderGrid(1,5); }
+    screen.innerHTML = '<h3>Wordle</h3>' + grid;
+    return;
+  }
+
+  if(type === "crossword") {
+    const grid = generateCrossword();
+    screen.innerHTML = '<h3 class="moon-header">Mini Crossword</h3>' + renderGrid(grid.length, grid.length);
+    return;
+  }
+
+  if(type === "connections") {
+    const c = generateConnections();
+    const flat = Object.values(c.groups).flat();
+    screen.innerHTML = '<h3>Connections</h3><p>Shuffle these and find the groups:</p><div>'+flat.sort(()=>Math.random()-0.5).join(" • ")+'</div>';
+    return;
+  }
+
+  if(type === "wordsearch") {
+    const ws = generateWordSearch();
+    screen.innerHTML = '<h3>Word Search</h3>' + renderGrid(10,10) + '<div>Words: '+ ws.words.join(', ') +'</div>';
+    return;
+  }
+
+  if(type === "sudoku") {
+    const board = generateSudoku();
+    screen.innerHTML = '<h3>Sudoku</h3>' + board.map(row=>'<div>'+row.join(" ")+'</div>').join("");
+    return;
+  }
+}
+
+/* Dark mode toggle */
+const toggle = document.getElementById('toggleDark');
+toggle.onclick = ()=>{ document.body.classList.toggle('dark'); };
+
+/* Simple weather demo */
+document.getElementById("screen").innerText = "";
+</script>
+
+<div class="divider">✦ ✦ ✦</div>
+<div class="decor-bottom">❧ ✧ ❧</div>
+<div class="divider">✦ ✦ ✦</div>
+<div class="decor-bottom">❧ ✧ ❧</div>
+
 </body>
 </html>
+
