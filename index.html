@@ -13,6 +13,26 @@
     max-width: 600px;
     margin: auto;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Subtle whimsical repeating background pattern */
+  body::before {
+    content: '✧ ✦ ✪ ❖ ☾ ✿ ';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    color: #3b2f2f;
+    opacity: 0.05;
+    z-index: -1;
+    white-space: pre;
+    pointer-events: none;
+    overflow: hidden;
+    background-repeat: repeat;
   }
 
   h1, h2, h3 {
@@ -49,23 +69,10 @@
     border-radius: 8px;
     border: 1px solid #ded6c5;
     min-height: 2rem;
-  }
-
-  /* Whimsical Decorations */
-  .decor-top,
-  .decor-bottom {
     text-align: center;
-    font-size: 1.4rem;
-    opacity: 0.6;
-    margin: 0.5rem 0;
-  }
-
-  .divider {
-    text-align: center;
-    font-size: 1rem;
-    letter-spacing: 4px;
-    opacity: 0.4;
-    margin: 1rem 0;
+    position: relative;
+    overflow: auto;
+    max-height: 400px;
   }
 
   .ascii-corner {
@@ -78,14 +85,6 @@
   .ascii-bottom-left { bottom: 6px; left: 6px; }
   .ascii-bottom-right { bottom: 6px; right: 6px; }
 
-  .moon-header::before {
-    content: "🌑 🌒 🌓 🌔 🌕";
-    display: block;
-    text-align: center;
-    opacity: 0.5;
-    margin-bottom: 0.4rem;
-  }
-
   input.puzzle-input {
     width: 1.4rem;
     height: 1.8rem;
@@ -93,6 +92,24 @@
     font-family: "Georgia", "Garamond", serif;
     font-size: 1.1rem;
     margin: 1px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .menu .btn {
+    margin: 0.4rem 0;
+    text-align: center;
+    width: 80%;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #ded6c5;
+    padding: 0.5rem;
+    border-radius: 6px;
   }
 
   body.dark {
@@ -108,43 +125,94 @@
     color: #ffffff;
   }
 
-  /* Whimsical floating sparkles */
   .sparkle {
     position: absolute;
     font-size: 1rem;
-    opacity: 0.3;
+    opacity: 0.2;
     pointer-events: none;
-    animation: floaty 4s infinite;
+    animation: floaty 8s infinite;
   }
   @keyframes floaty {
     0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(180deg); }
+    50% { transform: translateY(-5px) rotate(180deg); }
     100% { transform: translateY(0) rotate(360deg); }
+  }
+
+  .glyph {
+    position: absolute;
+    font-size: 0.9rem;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .puzzle-grid {
+    display: inline-block;
+  }
+
+  #screen.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    z-index: 9999;
+    background: #fdfaf5;
+    overflow: auto;
   }
 </style>
 </head>
 <body>
 <button id="toggleDark" style="margin-bottom:1rem;">Toggle Dark Mode</button>
+
+<script>
+const sparkles = 60;
+const sparkleChars = ['✦','✧','❂','✺','✹','✵','✷'];
+for(let i=0;i<sparkles;i++){
+  const s = document.createElement('span');
+  s.className='sparkle';
+  s.textContent = sparkleChars[Math.floor(Math.random()*sparkleChars.length)];
+  s.style.left = Math.random()*100+'%';
+  s.style.top = Math.random()*200+'%';
+  s.style.fontSize = (Math.random()*10+8)+'px';
+  document.body.appendChild(s);
+}
+
+const glyphs = ['☾','★','✿','❀','☄','♛','♕','❁','✧','⚝'];
+for(let i=0;i<40;i++){
+  const g = document.createElement('span');
+  g.className='glyph';
+  g.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+  g.style.left=Math.random()*100+'%';
+  g.style.top=Math.random()*200+'%';
+  g.style.fontSize=(Math.random()*12+6)+'px';
+  document.body.appendChild(g);
+}
+</script>
+
 <div class="ascii-corner ascii-top-left">🍄</div>
 <div class="ascii-corner ascii-top-right">🌿</div>
 <div class="ascii-corner ascii-bottom-left">📚</div>
 <div class="ascii-corner ascii-bottom-right">🌙</div>
+
 <div class="decor-top">✧･ﾟ: *✧*:･ﾟ✧</div>
 <div class="divider">✦ ✦ ✦</div>
 
-<h2 style="text-align:center; margin-top:1rem;">🧩 Cozy Puzzle Menu</h2>
+<h2 style="text-align:center; margin-top:1rem;">[puzzle] Cozy Puzzle Menu</h2>
 <div class="section">
   <button onclick="showPuzzle('wordle')">Wordle</button>
   <button onclick="showPuzzle('crossword')">Crossword</button>
   <button onclick="showPuzzle('connections')">Connections</button>
   <button onclick="showPuzzle('wordsearch')">Word Search</button>
   <button onclick="showPuzzle('sudoku')">Sudoku</button>
+  <button onclick="toggleFullscreen()">Toggle Fullscreen</button>
 </div>
 
-<div id="screen" class="section">Tap a puzzle above to begin ✧</div>
+<div id="screen" class="section" style="text-align:center;">✨✨ Tap a puzzle above to begin ✧</div>
 
 <h1>Kindle Dashboard</h1>
-
 <div class="menu">
   <a class="btn" href="https://www.google.com" target="_blank">Search Engine</a>
   <a class="btn" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a>
@@ -154,27 +222,15 @@
   <a class="btn" href="https://www.thesaurus.com" target="_blank">Thesaurus</a>
 </div>
 
-<!-- WEATHER -->
-<div id="weather" class="section">
-  <h2>Weather</h2>
-  <div class="card" id="weatherBox">Loading weather...</div>
-</div>
-
-<!-- NOTES -->
-<div id="notes" class="section">
-  <h2>Quick Notes</h2>
-  <textarea id="noteArea" style="width:100%;height:120px;font-size:16px;border:1px solid #000;"></textarea>
-  <button onclick="saveNote()">Save</button>
-  <div id="noteSavedMsg"></div>
-</div>
-
 <script>
 const toggle = document.getElementById('toggleDark');
-toggle.onclick = ()=>{
-  document.body.classList.toggle('dark');
-};
+toggle.onclick = ()=>{ document.body.classList.toggle('dark'); };
 
-// --- Universal Input Grid with auto-advance ---
+function toggleFullscreen() {
+  const screen = document.getElementById('screen');
+  screen.classList.toggle('fullscreen');
+}
+
 function renderGrid(rows, cols=rows) {
   let html = '<div class="puzzle-grid">';
   for (let r=0;r<rows;r++){
@@ -195,33 +251,8 @@ function moveNext(el){
   }
 }
 
-// --- Large dictionary array for random words ---
-const DICTIONARY = [
-  "abandon","ability","absorb","abstract","academy","accent","access","accuse","achieve","across",
-  "action","active","actual","advice","affect","afford","against","agency","agenda","almost",
-  "already","amazing","amount","animal","annual","answer","anxiety","anybody","anymore","applied",
-  "around","arrive","artist","aspect","assume","athlete","attempt","attend","author","avenue",
-  "balance","beauty","because","become","before","behind","belief","belong","benefit","better",
-  "beyond","bicycle","binding","bitter","black","blame","blanket","blend","bless","bliss",
-  "board","border","borrow","bottle","bottom","breeze","bright","broken","budget","builder",
-  "cabin","candle","capture","career","careful","castle","casual","caution","ceiling","center",
-  "chance","change","charge","charity","chase","choice","choose","circle","classic","clean",
-  "clever","closet","cloud","coffee","comfort","common","company","compare","complete","complex",
-  "concept","concert","connect","consent","contact","contain","content","control","convert","cottage",
-  "courage","create","credit","crystal","culture","curious","current","custom","danger","daring",
-  "darkness","decide","decline","decorate","degree","delight","deliver","depend","deserve","design",
-  "detail","develop","device","devote","diamond","dinner","distant","doctor","domestic","double",
-  "dream","driver","during","dynamic","eager","earth","effect","effort","either","elder",
-  "electric","element","embody","emerge","emotion","enable","encore","energy","engage","enjoy",
-  "enough","ensure","entire","entity","envy","episode","escape","essential","estate","ethics",
-  "evidence","exact","example","exceed","except","exchange","excite","exercise","exist","expand",
-  "expect","expert","explain","explore","express","extend","extra","extreme","fabric","facing",
-  "factor","fail","family","famous","farmer","fashion","feature","fellow","female","festival",
-  "figure","filter","final","finance","finding","finish","fire","flight","flower","focus"
-  // Add more words as needed
-];
+const DICTIONARY = ["abandon","ability","absorb","abstract","academy","accent","access","accuse","achieve","across","action","active","actual","advice","affect","afford","against","agency","agenda","almost","already","amazing","amount","animal","annual","answer","anxiety","anybody","anymore","applied","around","arrive","artist","aspect","assume","athlete","attempt","attend","author","avenue","balance","beauty","because","become","before","behind","belief","belong","benefit","better","beyond","bicycle","binding","bitter","black","blame","blanket","blend","bless","bliss","board","border","borrow","bottle","bottom","breeze","bright","broken","budget","builder","cabin","candle","capture","career","careful","castle","casual","caution","ceiling","center","chance","change","charge","charity","chase","choice","choose","circle","classic","clean"];
 
-// --- Puzzle Generators ---
 function randomWord(length=5){
   const pool = DICTIONARY.filter(w => w.length === length);
   return pool[Math.floor(Math.random()*pool.length)];
@@ -229,7 +260,7 @@ function randomWord(length=5){
 
 function showPuzzle(type){
   const screen = document.getElementById('screen');
-  if(type === 'wordle'){
+  if(type==='wordle'){
     let grid='';
     for(let i=0;i<6;i++){ grid += renderGrid(1,5); }
     screen.innerHTML = '<h3>Wordle</h3>' + grid;
@@ -237,14 +268,12 @@ function showPuzzle(type){
   }
   if(type==='crossword'){
     let gridWords=[];
-    for(let i=0;i<5;i++){
-      gridWords.push(randomWord(5).toUpperCase());
-    }
+    for(let i=0;i<5;i++){ gridWords.push(randomWord(5).toUpperCase()); }
     screen.innerHTML='<h3 class="moon-header">Mini Crossword</h3>';
     gridWords.forEach(w=>{
       let row = '';
       for(let ch of w) row += `<input class="puzzle-input" maxlength="1" oninput="moveNext(this)">`;
-      screen.innerHTML += `<div>${row}</div>`;
+      screen.innerHTML += `<div style="text-align:center;">${row}</div>`;
     });
     return;
   }
@@ -261,7 +290,7 @@ function showPuzzle(type){
     for(let r=0;r<10;r++){
       let row='';
       for(let c=0;c<10;c++) row += `<input class="puzzle-input" maxlength="1">`;
-      screen.innerHTML += `<div>${row}</div>`;
+      screen.innerHTML += `<div style="text-align:center;">${row}</div>`;
     }
     screen.innerHTML += '<div>Words: '+words.join(', ')+'</div>';
     return;
@@ -271,34 +300,13 @@ function showPuzzle(type){
     for(let r=0;r<9;r++){
       let row='';
       for(let c=0;c<9;c++) row += `<input class="puzzle-input" maxlength="1">`;
-      screen.innerHTML += `<div>${row}</div>`;
+      screen.innerHTML += `<div style="text-align:center;">${row}</div>`;
     }
     return;
   }
 }
-
-// --- Notes ---
-const noteArea = document.getElementById("noteArea");
-const saved = localStorage.getItem("kindleNote");
-if (saved) noteArea.value = saved;
-function saveNote(){
-  localStorage.setItem("kindleNote", noteArea.value);
-  document.getElementById("noteSavedMsg").innerText = "Saved.";
-}
-
-// --- Simple weather demo ---
-document.getElementById("weatherBox").innerText = "Clear • 72°F";
-
-// --- Magical sparkles ---
-for(let i=0;i<40;i++){
-  const s=document.createElement('div');
-  s.className='sparkle';
-  s.style.left=Math.random()*90+'%';
-  s.style.top=Math.random()*90+'%';
-  s.textContent='✦';
-  document.body.appendChild(s);
-}
 </script>
 </body>
 </html>
+
 
