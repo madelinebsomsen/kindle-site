@@ -28,6 +28,7 @@
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative;
   }
 
   button {
@@ -67,38 +68,6 @@
     margin: 1rem 0;
   }
 
-  /* Candle-style borders */
-  .section {
-    border: 2px solid #e5dccb;
-    border-image: repeating-linear-gradient(
-      to bottom,
-      #e5dccb,
-      #e5dccb 6px,
-      #f7f5f0 6px,
-      #f7f5f0 12px
-    ) 1;
-  }
-
-  /* Drop caps */
-  .dropcap:first-letter {
-    font-size: 2.4rem;
-    float: left;
-    padding-right: 6px;
-    padding-top: 2px;
-    font-family: "Garamond", serif;
-    color: #4a3b3b;
-  }
-
-  /* Moon phase headers */
-  .moon-header::before {
-    content: "🌑 🌒 🌓 🌔 🌕";
-    display: block;
-    text-align: center;
-    opacity: 0.5;
-    margin-bottom: 0.4rem;
-  }
-
-  /* ASCII decorations */
   .ascii-corner {
     font-size: 0.8rem;
     opacity: 0.5;
@@ -109,131 +78,57 @@
   .ascii-bottom-left { bottom: 6px; left: 6px; }
   .ascii-bottom-right { bottom: 6px; right: 6px; }
 
-  /* Glimmer-on-tap */
-  .glimmer {
+  .moon-header::before {
+    content: "🌑 🌒 🌓 🌔 🌕";
+    display: block;
     text-align: center;
-    margin: 1rem 0;
-    opacity: 0.6;
-  }
-
-  /* Page-turn illusion */
-  .page-turn {
-    text-align: center;
-    font-size: 1.2rem;
     opacity: 0.5;
-    margin: 1rem 0;
+    margin-bottom: 0.4rem;
   }
 
-  /* Storybook mode */
-  .storybook {
-    background: #fdfaf5;
-    border: 3px double #d9cbb2;
-    padding: 1rem;
-    border-radius: 14px;
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
-    font-family: "Garamond", serif;
-  }
-
-  /* Ritual mode */
-  .ritual {
-    background: #fffdf7;
-    border: 2px dashed #cbbfa8;
-    padding: 1rem;
-    margin-top: 1rem;
-    border-radius: 10px;
-  }
-
-  /* Oracle vibe */
-  .oracle {
-    text-align: center;
-    padding: 1rem;
-    border-radius: 10px;
-    background: #fefbf4;
-    border: 1px solid #e0d4c3;
-    margin-top: 1rem;
-  }
-
-  /* Woodland frame */
-  .woodland {
-    border: 6px solid #e6ddcc;
-    border-image: repeating-linear-gradient(
-      45deg,
-      #e6ddcc,
-      #e6ddcc 10px,
-      #d8cfbd 10px,
-      #d8cfbd 20px
-    ) 1;
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
- /* Dark mode */
-body.dark {
-  background-color: #1a1a1a;
-  color: #ffffff; /* changed from #e6e6e6 to white */
-}
-body.dark .section {
-  background: #2a2a2a;
-  border-color: #444;
-}
-body.dark button {
-  background: #3a3a3a;
-  color: #ffffff; /* changed from #e6e6e6 to white */
-}
-body.dark .puzzle-input {
-  background: #2a2a2a;
-  color: #ffffff; /* changed input text to white */
-  border-color: #555;
-}
-  /* Dark mode adjustments for special sections */
-body.dark .ritual,
-body.dark .oracle,
-body.dark .storybook,
-body.dark .woodland,
-body.dark .glimmer,
-body.dark .page-turn,
-body.dark .divider,
-body.dark .decor-top,
-body.dark .decor-bottom {
-  background: #2a2a2a; /* dark background for readability */
-  color: #ffffff; /* white text */
-  border-color: #555; /* subtle border for contrast */
-  opacity: 0.9; /* optional: slightly mystical feel */
-}
-
-  /* Puzzle input grid */
-  .puzzle-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 1.8rem);
-    gap: 0.2rem;
-    justify-content: center;
-    margin: 0.4rem 0;
-  }
-  .puzzle-input {
-    width: 1.8rem;
+  input.puzzle-input {
+    width: 1.4rem;
     height: 1.8rem;
     text-align: center;
-    font-family: "Garamond", serif;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    background: #fdfaf5;
+    font-family: "Georgia", "Garamond", serif;
+    font-size: 1.1rem;
+    margin: 1px;
   }
-  body.dark .puzzle-input {
+
+  body.dark {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  body.dark .section {
     background: #2a2a2a;
-    color: #e6e6e6;
     border-color: #555;
+  }
+  body.dark button {
+    background: #3a3a3a;
+    color: #ffffff;
+  }
+
+  /* Whimsical floating sparkles */
+  .sparkle {
+    position: absolute;
+    font-size: 1rem;
+    opacity: 0.3;
+    pointer-events: none;
+    animation: floaty 4s infinite;
+  }
+  @keyframes floaty {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(180deg); }
+    100% { transform: translateY(0) rotate(360deg); }
   }
 </style>
 </head>
 <body>
-
 <button id="toggleDark" style="margin-bottom:1rem;">Toggle Dark Mode</button>
-
 <div class="ascii-corner ascii-top-left">🍄</div>
 <div class="ascii-corner ascii-top-right">🌿</div>
 <div class="ascii-corner ascii-bottom-left">📚</div>
 <div class="ascii-corner ascii-bottom-right">🌙</div>
-
 <div class="decor-top">✧･ﾟ: *✧*:･ﾟ✧</div>
 <div class="divider">✦ ✦ ✦</div>
 
@@ -248,22 +143,21 @@ body.dark .decor-bottom {
 
 <div id="screen" class="section">Tap a puzzle above to begin ✧</div>
 
-<div class="glimmer">tap for a little magic ✧</div>
-<div class="page-turn">⇢ turn the page ⇠</div>
-<div class="oracle">🔮 your tiny oracle awaits</div>
-<div class="ritual">🕯 ritual mode ready</div>
-<div class="storybook">📖 storybook mode activated</div>
-<div class="woodland">🌲 wrapped in woodland magic</div>
-
 <h1>Kindle Dashboard</h1>
 
 <div class="menu">
-  <a class="btn" href="https://lite.duckduckgo.com/" target="_blank">Search Engine</a>
-  <a class="btn" href="https://en.m.wikipedia.org/" target="_blank">Wikipedia</a>
-  <a class="btn" href="https://old.reddit.com/" target="_blank">Old Reddit</a>
-  <a class="btn" href="https://archiveofourown.org/" target="_blank">Archive of Our Own</a>
-  <a class="btn" href="https://www.merriam-webster.com/" target="_blank">Dictionary</a>
-  <a class="btn" href="https://www.thesaurus.com/" target="_blank">Thesaurus</a>
+  <a class="btn" href="https://www.google.com" target="_blank">Search Engine</a>
+  <a class="btn" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a>
+  <a class="btn" href="https://old.reddit.com" target="_blank">Old Reddit</a>
+  <a class="btn" href="https://archiveofourown.org" target="_blank">Archive of Our Own</a>
+  <a class="btn" href="https://www.merriam-webster.com" target="_blank">Dictionary</a>
+  <a class="btn" href="https://www.thesaurus.com" target="_blank">Thesaurus</a>
+</div>
+
+<!-- WEATHER -->
+<div id="weather" class="section">
+  <h2>Weather</h2>
+  <div class="card" id="weatherBox">Loading weather...</div>
 </div>
 
 <!-- NOTES -->
@@ -275,128 +169,136 @@ body.dark .decor-bottom {
 </div>
 
 <script>
-  const noteArea = document.getElementById("noteArea");
-  const saved = localStorage.getItem("kindleNote");
-  if (saved) noteArea.value = saved;
+const toggle = document.getElementById('toggleDark');
+toggle.onclick = ()=>{
+  document.body.classList.toggle('dark');
+};
 
-  function saveNote(){
-    localStorage.setItem("kindleNote", noteArea.value);
-    document.getElementById("noteSavedMsg").innerText = "Saved.";
-  }
-</script>
-
-<script>
-/* === SIMPLE RANDOM PUZZLE GENERATORS (UPDATED) === */
-
-/* WORD LISTS */
-const WORDLE_LIST = ["moss","read","cozy","leaf","kindle","magic","quiet","soft","moon","glow"]; 
-
-const WORD_SEARCH_POOL = ["MOON","LEAF","GLOW","READ","MOSS","CLOUD","QUIET","STARS","WOODS","FAIRY"];
-
-const CROSSWORD_CLUES = [
-  ["MAPLE","ACORN","FERNS","MISTY","OWLET"],
-  ["WATER","STONE","BRIAR","CLOUD","RIVER"],
-  ["BERRY","MOSSY","LEMON","EARTH","NIGHT"]
-];
-
-/* UNIVERSAL GRID RENDER */
-function renderGrid(rows, cols = rows) {
+// --- Universal Input Grid with auto-advance ---
+function renderGrid(rows, cols=rows) {
   let html = '<div class="puzzle-grid">';
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      html += '<input class="puzzle-input" maxlength="1">';
+  for (let r=0;r<rows;r++){
+    for (let c=0;c<cols;c++){
+      html += `<input class="puzzle-input" maxlength="1" oninput="moveNext(this)">`;
     }
   }
   html += '</div>';
   return html;
 }
 
-/* PUZZLE GENERATORS */
-function generateWordle() {
-  return WORDLE_LIST[Math.floor(Math.random()*WORDLE_LIST.length)];
+function moveNext(el){
+  if(el.value.length >= 1){
+    const form = el.parentElement;
+    const inputs = Array.from(form.querySelectorAll('input'));
+    const idx = inputs.indexOf(el);
+    if(idx < inputs.length-1) inputs[idx+1].focus();
+  }
 }
 
-function generateCrossword() {
-  const grids = [
-    ["APPLE","PLANT","LEMON","EAGLE","NESTS"],
-    ["MOONS","RIVER","EVERY","STORY","YEARN"],
-    ["QUIET","UNDER","NIGHT","GLOWN","TREES"]
-  ];
-  return grids[Math.floor(Math.random()*grids.length)];
+// --- Large dictionary array for random words ---
+const DICTIONARY = [
+  "abandon","ability","absorb","abstract","academy","accent","access","accuse","achieve","across",
+  "action","active","actual","advice","affect","afford","against","agency","agenda","almost",
+  "already","amazing","amount","animal","annual","answer","anxiety","anybody","anymore","applied",
+  "around","arrive","artist","aspect","assume","athlete","attempt","attend","author","avenue",
+  "balance","beauty","because","become","before","behind","belief","belong","benefit","better",
+  "beyond","bicycle","binding","bitter","black","blame","blanket","blend","bless","bliss",
+  "board","border","borrow","bottle","bottom","breeze","bright","broken","budget","builder",
+  "cabin","candle","capture","career","careful","castle","casual","caution","ceiling","center",
+  "chance","change","charge","charity","chase","choice","choose","circle","classic","clean",
+  "clever","closet","cloud","coffee","comfort","common","company","compare","complete","complex",
+  "concept","concert","connect","consent","contact","contain","content","control","convert","cottage",
+  "courage","create","credit","crystal","culture","curious","current","custom","danger","daring",
+  "darkness","decide","decline","decorate","degree","delight","deliver","depend","deserve","design",
+  "detail","develop","device","devote","diamond","dinner","distant","doctor","domestic","double",
+  "dream","driver","during","dynamic","eager","earth","effect","effort","either","elder",
+  "electric","element","embody","emerge","emotion","enable","encore","energy","engage","enjoy",
+  "enough","ensure","entire","entity","envy","episode","escape","essential","estate","ethics",
+  "evidence","exact","example","exceed","except","exchange","excite","exercise","exist","expand",
+  "expect","expert","explain","explore","express","extend","extra","extreme","fabric","facing",
+  "factor","fail","family","famous","farmer","fashion","feature","fellow","female","festival",
+  "figure","filter","final","finance","finding","finish","fire","flight","flower","focus"
+  // Add more words as needed
+];
+
+// --- Puzzle Generators ---
+function randomWord(length=5){
+  const pool = DICTIONARY.filter(w => w.length === length);
+  return pool[Math.floor(Math.random()*pool.length)];
 }
 
-function generateConnections() {
-  const sets = [
-    { groups: { fruits:["APPLE","PEAR","PLUM","BERRY"], cozy:["MUG","BOOK","SOCKS","BLANKET"], nature:["MOSS","LEAF","STONE","STREAM"], sky:["MOON","STAR","CLOUD","DAWN"] } },
-    { groups: { colors:["RED","BLUE","GREEN","GOLD"], sounds:["HUM","TAP","BUZZ","RUSTLE"], weather:["RAIN","SNOW","WIND","FOG"], plants:["FERN","MINT","IVY","ROSE"] } }
-  ];
-  return sets[Math.floor(Math.random()*sets.length)];
-}
-
-function generateWordSearch() {
-  let chosen = [...WORD_SEARCH_POOL].sort(() => Math.random() - 0.5).slice(0,5);
-  const grid = Array.from({length:10},()=>Array.from({length:10},()=>String.fromCharCode(65+Math.floor(Math.random()*26))));
-  return {words: chosen, grid};
-}
-
-function generateSudoku() {
-  const boards = [
-    [[5,3,0,0,7,0,0,0,0],[6,0,0,1,9,5,0,0,0],[0,9,8,0,0,0,0,6,0],[8,0,0,0,6,0,0,0,3],[4,0,0,8,0,3,0,0,1],[7,0,0,0,2,0,0,0,6],[0,6,0,0,0,0,2,8,0],[0,0,0,4,1,9,0,0,5],[0,0,0,0,8,0,0,7,9]],
-    [[0,2,0,6,0,8,0,0,0],[5,8,0,0,0,9,7,0,0],[0,0,0,0,4,0,0,0,0],[3,7,0,0,0,0,5,0,0],[6,0,0,0,0,0,0,0,4],[0,0,8,0,0,0,0,1,3],[0,0,0,0,2,0,0,0,0],[0,0,9,8,0,0,0,3,6],[0,0,0,3,0,6,0,9,0]]
-  ];
-  return boards[Math.floor(Math.random()*boards.length)];
-}
-
-/* === HOOK PUZZLES TO SCREEN === */
-function showPuzzle(type) {
-  const screen = document.getElementById("screen");
-
-  if(type === "wordle") {
-    let grid = '';
+function showPuzzle(type){
+  const screen = document.getElementById('screen');
+  if(type === 'wordle'){
+    let grid='';
     for(let i=0;i<6;i++){ grid += renderGrid(1,5); }
     screen.innerHTML = '<h3>Wordle</h3>' + grid;
     return;
   }
-
-  if(type === "crossword") {
-    const grid = generateCrossword();
-    screen.innerHTML = '<h3 class="moon-header">Mini Crossword</h3>' + renderGrid(grid.length, grid.length);
+  if(type==='crossword'){
+    let gridWords=[];
+    for(let i=0;i<5;i++){
+      gridWords.push(randomWord(5).toUpperCase());
+    }
+    screen.innerHTML='<h3 class="moon-header">Mini Crossword</h3>';
+    gridWords.forEach(w=>{
+      let row = '';
+      for(let ch of w) row += `<input class="puzzle-input" maxlength="1" oninput="moveNext(this)">`;
+      screen.innerHTML += `<div>${row}</div>`;
+    });
     return;
   }
-
-  if(type === "connections") {
-    const c = generateConnections();
-    const flat = Object.values(c.groups).flat();
-    screen.innerHTML = '<h3>Connections</h3><p>Shuffle these and find the groups:</p><div>'+flat.sort(()=>Math.random()-0.5).join(" • ")+'</div>';
+  if(type==='connections'){
+    let words=[];
+    for(let i=0;i<16;i++) words.push(randomWord().toUpperCase());
+    screen.innerHTML=`<h3>Connections</h3><div>${words.sort(()=>Math.random()-0.5).join(" • ")}</div>`;
     return;
   }
-
-  if(type === "wordsearch") {
-    const ws = generateWordSearch();
-    screen.innerHTML = '<h3>Word Search</h3>' + renderGrid(10,10) + '<div>Words: '+ ws.words.join(', ') +'</div>';
+  if(type==='wordsearch'){
+    let words=[];
+    for(let i=0;i<5;i++) words.push(randomWord(Math.floor(Math.random()*4)+3).toUpperCase());
+    screen.innerHTML='<h3>Word Search</h3>';
+    for(let r=0;r<10;r++){
+      let row='';
+      for(let c=0;c<10;c++) row += `<input class="puzzle-input" maxlength="1">`;
+      screen.innerHTML += `<div>${row}</div>`;
+    }
+    screen.innerHTML += '<div>Words: '+words.join(', ')+'</div>';
     return;
   }
-
-  if(type === "sudoku") {
-    const board = generateSudoku();
-    screen.innerHTML = '<h3>Sudoku</h3>' + board.map(row=>'<div>'+row.join(" ")+'</div>').join("");
+  if(type==='sudoku'){
+    screen.innerHTML='<h3>Sudoku</h3>';
+    for(let r=0;r<9;r++){
+      let row='';
+      for(let c=0;c<9;c++) row += `<input class="puzzle-input" maxlength="1">`;
+      screen.innerHTML += `<div>${row}</div>`;
+    }
     return;
   }
 }
 
-/* Dark mode toggle */
-const toggle = document.getElementById('toggleDark');
-toggle.onclick = ()=>{ document.body.classList.toggle('dark'); };
+// --- Notes ---
+const noteArea = document.getElementById("noteArea");
+const saved = localStorage.getItem("kindleNote");
+if (saved) noteArea.value = saved;
+function saveNote(){
+  localStorage.setItem("kindleNote", noteArea.value);
+  document.getElementById("noteSavedMsg").innerText = "Saved.";
+}
 
-/* Simple weather demo */
-document.getElementById("screen").innerText = "";
+// --- Simple weather demo ---
+document.getElementById("weatherBox").innerText = "Clear • 72°F";
+
+// --- Magical sparkles ---
+for(let i=0;i<40;i++){
+  const s=document.createElement('div');
+  s.className='sparkle';
+  s.style.left=Math.random()*90+'%';
+  s.style.top=Math.random()*90+'%';
+  s.textContent='✦';
+  document.body.appendChild(s);
+}
 </script>
-
-<div class="divider">✦ ✦ ✦</div>
-<div class="decor-bottom">❧ ✧ ❧</div>
-<div class="divider">✦ ✦ ✦</div>
-<div class="decor-bottom">❧ ✧ ❧</div>
-
 </body>
 </html>
 
